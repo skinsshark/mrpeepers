@@ -1,4 +1,14 @@
-const EyeballContainer = ({ className }: { className?: string }) => {
+import { useEffect } from "react";
+
+import { useState } from "react";
+
+const EyeballContainer = ({
+  mousePosition,
+  className,
+}: {
+  mousePosition: { x: number; y: number };
+  className?: string;
+}) => {
   return (
     <div className={`eyeball-container ${className}`}>
       <div className="eyeball">
@@ -31,7 +41,15 @@ const EyeballContainer = ({ className }: { className?: string }) => {
           </defs>
         </svg>
       </div>
-      <div className="iris">
+      <div
+        className="iris"
+        // moves less than pupil but still moves
+        style={{
+          transform: `translate( ${-55 + (mousePosition.x / 100) * 10}%, ${
+            -55 + (mousePosition.y / 100) * 10
+          }%)`,
+        }}
+      >
         <svg
           width="100%"
           height="100%"
@@ -61,7 +79,14 @@ const EyeballContainer = ({ className }: { className?: string }) => {
           </defs>
         </svg>
       </div>
-      <div className="pupil">
+      <div
+        className="pupil"
+        style={{
+          transform: `translate( ${-70 + (mousePosition.x / 100) * 20}%, ${
+            -60 + (mousePosition.y / 100) * 20
+          }%)`,
+        }}
+      >
         <svg
           width="100%"
           height="100%"
@@ -78,11 +103,40 @@ const EyeballContainer = ({ className }: { className?: string }) => {
 };
 
 const MrPeepers = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  console.log(mousePosition.x, mousePosition.y);
+
+  useEffect(() => {
+    let rafId: number;
+    let lastUpdate = 0;
+    const minUpdateInterval = 1000 / 60; // 60fps
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const now = performance.now();
+      if (now - lastUpdate < minUpdateInterval) return;
+
+      rafId = requestAnimationFrame(() => {
+        setMousePosition({
+          x: Math.min(60, (e.clientX / window.innerWidth) * 100),
+          y: (e.clientY / window.innerHeight) * 100,
+        });
+        lastUpdate = now;
+      });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, []);
+
   return (
     <div className="image-sidebar">
-      <EyeballContainer />
-      <EyeballContainer className="middle" />
-      <EyeballContainer className="right" />
+      <EyeballContainer mousePosition={mousePosition} />
+      <EyeballContainer mousePosition={mousePosition} className="middle" />
+      <EyeballContainer mousePosition={mousePosition} className="right" />
     </div>
   );
 };
