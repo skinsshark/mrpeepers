@@ -104,7 +104,6 @@ const EyeballContainer = ({
 
 const MrPeepers = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  console.log(mousePosition.x, mousePosition.y);
 
   useEffect(() => {
     let rafId: number;
