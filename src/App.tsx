@@ -1,6 +1,6 @@
 import "./App.css";
-import mrPeepersImg from "./assets/mrpeepers.jpeg";
 import RadioButtonGroup from "./RadioButtonGroup";
+import MrPeepers from "./MrPeepers";
 
 function App() {
   const options = [
@@ -29,9 +29,7 @@ function App() {
         />
       </div>
 
-      <div className="image-sidebar">
-        <img src={mrPeepersImg} alt="mr. peepers" />
-      </div>
+      <MrPeepers />
     </div>
   );
 }
