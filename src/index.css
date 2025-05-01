@@ -4,10 +4,17 @@
 }
 
 body {
+  font-family: "ES Build", sans-serif;
+  font-feature-settings: "ss02";
   background: url(./assets/bg.png) no-repeat center top/cover;
   height: 100svh;
   width: 100svw;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+h2 {
+  color: #002253;
+  font-weight: 600;
 }
