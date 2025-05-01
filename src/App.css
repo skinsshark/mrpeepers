@@ -1,0 +1,32 @@
+.modal-wrapper {
+  display: flex;
+  width: 70svw;
+  height: 70svh;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.survey-wrapper {
+  flex-grow: 1;
+  padding: 24px 32px 32px;
+}
+
+.image-sidebar {
+  width: 40%;
+  background-color: #0a9ee6;
+  display: flex;
+  align-items: flex-end;
+
+  img {
+    width: 100%;
+    object-fit: contain;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .image-sidebar {
+    display: none;
+  }
+}
