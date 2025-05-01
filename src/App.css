@@ -134,8 +134,17 @@ h2 {
 }
 
 @media screen and (max-width: 867px) {
+  h2 {
+    font-size: 18px;
+  }
+
   .modal-wrapper {
     width: 90svw;
+    height: 98svh;
+  }
+
+  .radio-button {
+    font-size: 10px;
   }
 
   .image-sidebar {
